@@ -1,0 +1,23 @@
+@import '../Variables';
+
+.nav {
+    grid-area: n;    
+    border-left: 10px solid $second-color;
+    border-right: 10px solid $second-color;
+    border-bottom: 10px solid #fff;
+    padding: 10px;
+    background-color: $main-color;
+
+    .item {        
+        margin: 5px 0;
+        a {
+            color: $second-color;
+            text-decoration: none;
+
+            &:hover {
+                color: yellow;
+            }
+        }
+    }
+
+}
