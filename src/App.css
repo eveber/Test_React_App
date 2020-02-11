@@ -1,0 +1,50 @@
+.App-wrapper {
+  display: grid;
+  grid-template-areas: "h h" "n c";
+  grid-template-rows: 60px 1fr;
+  grid-template-columns: 2fr 10fr;
+  width: 70%;
+  margin: 0 auto;
+}
+.App-wrapper .header,
+.App-wrapper .nav,
+.App-wrapper .profile {
+  border-left: 10px solid #fff;
+  border-right: 10px solid #fff;
+}
+.App-wrapper .header {
+  grid-area: h;
+  background-color: #2db944;
+  border-top: 10px solid #fff;
+  border-bottom: 10px solid #fff;
+}
+.App-wrapper .header .logo {
+  height: 40px;
+}
+.App-wrapper .nav {
+  grid-area: n;
+  background-color: #2db944;
+  border-bottom: 10px solid #fff;
+  padding: 10px;
+}
+.App-wrapper .nav div {
+  margin: 5px 0;
+}
+.App-wrapper .nav div a {
+  color: #fff;
+  text-decoration: none;
+}
+.App-wrapper .nav div a:hover {
+  color: yellow;
+}
+.App-wrapper .profile {
+  grid-area: c;
+  background-color: #fff;
+  border-bottom: 10px solid #ffff;
+  padding: 0 0 10px 0;
+}
+.App-wrapper .profile .profile-image {
+  height: 100px;
+  background: url('https://sx-content-labs.sixt.io/Media/sf-countries/USA/Chicago/chicago-city-header.jpg') 100% 100% no-repeat;
+  background-size: cover;
+}
