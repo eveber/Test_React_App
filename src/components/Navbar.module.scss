@@ -4,7 +4,7 @@
     grid-area: n;    
     border-left: 10px solid $second-color;
     border-right: 10px solid $second-color;
-    border-bottom: 10px solid #fff;
+    border-bottom: 10px solid $second-color;;
     padding: 10px;
     background-color: $main-color;
 
@@ -13,9 +13,11 @@
         a {
             color: $second-color;
             text-decoration: none;
+            // font-size: 18px;
+            // font-weight: bold;
 
             &:hover {
-                color: yellow;
+                color: $active-color;
             }
         }
     }
