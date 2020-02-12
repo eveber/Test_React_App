@@ -1,0 +1,7 @@
+@import './../../Variables';
+
+.profileWrapper {
+    grid-area: c;
+    display: grid;
+    grid-gap: $main-margin;
+}

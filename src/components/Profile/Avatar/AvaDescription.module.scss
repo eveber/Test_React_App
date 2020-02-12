@@ -1,0 +1,25 @@
+@import './../../../Variables';
+
+.avatarWrapper {
+    margin-bottom: $main-margin;
+    .avatar {
+        display: inline-block;
+        margin-right: $main-margin;
+            
+        img {
+            width: 100px;                
+        }
+    }
+
+    .description {
+        display: inline-block;
+        position: absolute;
+        font-size: 14px;
+
+        .name {
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+    }
+}
+

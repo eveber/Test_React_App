@@ -1,0 +1,21 @@
+@import './../../../../Variables.scss';
+
+.postWrapp {
+    .item {
+        margin-left: 20px;
+        margin-bottom: 30px;
+
+            img {                
+                border-radius: 50%;
+                margin-right: $main-margin;
+                width:$avatar-post-size;
+                height: $avatar-post-size;
+            }        
+
+        .postText {
+            display: inline-block;
+            position: absolute;
+            
+        }
+    }
+}

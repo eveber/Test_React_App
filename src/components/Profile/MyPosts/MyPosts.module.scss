@@ -1,0 +1,42 @@
+@import './../../../Variables.scss';
+
+.postsWrapper {
+    width: 85%;
+    label {
+        display: block;
+        margin-bottom: $main-margin;
+    }
+    
+    .txtAreaWrapp {
+        display: inline-block;
+        margin-bottom: $main-margin;
+        width: 100%;
+        textarea {               
+            background-color: #f2f2f2;
+            width: 99%;
+            height: 50px;
+            margin-bottom: 5px;
+            padding: 5px;
+            outline: none;
+            resize: none;
+            border: none;
+        }
+
+        .btnSendWrapp {
+            text-align: end;
+            button {
+                border: none;
+                outline: none;
+                background-color: $main-color;
+                color: $second-color;
+                width: 100px;
+                height: 25px;
+                &:hover {                    
+                    transition: $main-transition;
+                    background: $second-active-color;
+                    font-size: 15px;
+                }
+            }
+        }
+    }    
+}

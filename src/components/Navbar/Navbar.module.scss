@@ -1,0 +1,23 @@
+@import './../../Variables';
+
+.nav {
+    grid-area: n;    
+    padding: 10px;
+    background-color: $main-color;
+
+    .item {        
+        margin: 5px 0;
+        height: 25px;
+        a {            
+            color: $second-color;
+            text-decoration: none;            
+
+            &:hover {                
+                transition: $main-transition;                
+                color: $active-color;
+                font-size: 20px;
+            }
+        }
+    }
+
+}

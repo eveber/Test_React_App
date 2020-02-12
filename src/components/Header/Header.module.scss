@@ -1,0 +1,14 @@
+@import './../../Variables';
+
+.header{
+    grid-area: h;
+    background-color: $main-color;
+    
+    
+    .logo {
+        margin-left: 10px;
+        margin-top: 5px;
+        height: 56px;
+    }
+    
+}
