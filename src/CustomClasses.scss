@@ -1,0 +1,46 @@
+@import './Variables';
+//Links
+.siteLink {
+  text-transform: uppercase;
+  color: $second-color;
+  text-decoration: none;
+
+  &:hover {
+    transition: $main-transition;
+    color: $active-color;
+    font-size: 18px;
+  }
+}
+
+.siteLinkActive {
+  color: $active-color;
+  font-size: 18px;
+}
+
+
+//Buttons
+.siteButton {
+  border: none;
+  outline: none;
+  background-color: $main-color;
+  color: $second-color;
+  width: 100px;
+  height: 25px;
+
+  &:hover {
+    transition: $main-transition;
+    background: $second-active-color;
+    font-size: 15px;
+  }
+}
+
+.siteTextarea {
+  background-color: #f2f2f2;
+  width: 100%;
+  height: 50px;
+  margin-bottom: 5px;
+  padding: 5px;
+  outline: none;
+  resize: none;
+  border: none;
+}

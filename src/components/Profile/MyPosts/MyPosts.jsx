@@ -7,16 +7,16 @@ const MyPosts = () => {
         <div className={m.postsWrapper}>
             <label>My posts</label>
             <div className={m.txtAreaWrapp}>
-                <textarea placeholder="Type your news here.."></textarea>
+                <textarea className={m.siteTextarea} placeholder="Type your news here.."></textarea>
                 <div className={m.btnSendWrapp}>
-                    <button>Send</button>
+                    <button className={m.siteButton}>Send</button>
                 </div>
             </div>
-            <Post message="Hey! Anybody here?" />
-            <Post message="Nope, no one here!" />
-            <Post message="Ok, then fuck no one!" />
+            <Post message="Hey! Anybody here?"/>
+            <Post message="Nope, no one here!"/>
+            <Post message="Ok, then fuck no one!"/>
         </div>
     );
-}
+};
 
 export default MyPosts;

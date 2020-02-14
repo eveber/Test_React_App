@@ -1,29 +1,18 @@
 @import '../../Variables';
+@import '../../CustomClasses';
 
 .nav {
-    grid-area: n;    
-    padding: 10px;
-    background-color: $main-color;
+  grid-area: n;
+  padding: 10px;
+  background-color: $main-color;
 
-    .item {        
-        margin: 5px 0;
-        height: 25px;
-        a {
-            text-transform: uppercase;
-            color: $second-color;
-            text-decoration: none;            
+  .item {
+    margin: 5px 0;
+    height: 25px;
+  }
 
-            &:hover {                
-                transition: $main-transition;                
-                color: $active-color;
-                font-size: 18px;
-            }
-        }
-
-        a.active {
-            color: $active-color;
-            font-size: 18px;
-        }
-    }
+  .btnSettings {
+    margin-top: $main-margin * 2;
+  }
 
 }

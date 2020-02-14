@@ -6,19 +6,29 @@ const Navbar = () => {
     return (
         <nav className={m.nav}>
             <div className={m.item}>
-                <NavLink to='profile' activeClassName={m.active}>Профиль</NavLink>
+                <NavLink to='/profile' className={m.siteLink} activeClassName={m.siteLinkActive}>
+                    Профиль
+                </NavLink>
             </div>
             <div className={m.item}>
-                <NavLink to='dialogs' activeClassName={m.active}>Сообщения</NavLink>
+                <NavLink to='/dialogs' className={m.siteLink} activeClassName={m.siteLinkActive}>
+                    Сообщения
+                </NavLink>
             </div>
             <div className={m.item}>
-                <NavLink to='news' activeClassName={m.active}>Новости</NavLink>
+                <NavLink to='/news' className={m.siteLink} activeClassName={m.siteLinkActive}>
+                    Новости
+                </NavLink>
             </div>
             <div className={m.item}>
-                <NavLink to='music' activeClassName={m.active}>Музыка</NavLink>
+                <NavLink to='/music' className={m.siteLink} activeClassName={m.siteLinkActive}>
+                    Музыка
+                </NavLink>
             </div>
-            <div className={m.item}>
-                <NavLink to='settings' activeClassName={m.active}>Настройки</NavLink>
+            <div className={m.item + ' ' + m.btnSettings}>
+                <NavLink to='/settings' className={m.siteLink} activeClassName={m.siteLinkActive}>
+                    Настройки
+                </NavLink>
             </div>
         </nav>
     );
