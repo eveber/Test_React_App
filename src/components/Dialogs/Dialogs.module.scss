@@ -10,4 +10,12 @@
 .dialogsWrapper {
   display: grid;
   grid-template-columns: 2fr 10fr;
+
+  .talkers {
+    border-right: 1px solid $main-color;
+  }
+
+  .messages {
+    padding-left: $main-padding;
+  }
 }
