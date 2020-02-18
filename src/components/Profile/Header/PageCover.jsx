@@ -1,10 +1,10 @@
 import React from 'react';
-import m from './PageCover.module.scss';
+import css from './PageCover.module.scss';
 import profileCoverImg from '../../images/city_profile.png';
 
 const PageCover = () => {
     return (
-        <div className={m.mainImage}>
+        <div className={css.mainImage}>
             <img src={profileCoverImg} alt="" />
         </div>
     );

@@ -1,32 +1,32 @@
 import React from 'react';
-import m from './Navbar.module.scss';
+import css from './Navbar.module.scss';
 import {NavLink} from "react-router-dom";
 
 const Navbar = () => {
     return (
-        <nav className={m.nav}>
-            <div className={m.item}>
-                <NavLink to='/profile' className={m.siteLink} activeClassName={m.siteLinkActive}>
+        <nav className={css.nav}>
+            <div className={css.item}>
+                <NavLink to='/profile' className={css.siteLink} activeClassName={css.siteLinkActive}>
                     Профиль
                 </NavLink>
             </div>
-            <div className={m.item}>
-                <NavLink to='/dialogs' className={m.siteLink} activeClassName={m.siteLinkActive}>
+            <div className={css.item}>
+                <NavLink to='/dialogs' className={css.siteLink} activeClassName={css.siteLinkActive}>
                     Сообщения
                 </NavLink>
             </div>
-            <div className={m.item}>
-                <NavLink to='/news' className={m.siteLink} activeClassName={m.siteLinkActive}>
+            <div className={css.item}>
+                <NavLink to='/news' className={css.siteLink} activeClassName={css.siteLinkActive}>
                     Новости
                 </NavLink>
             </div>
-            <div className={m.item}>
-                <NavLink to='/music' className={m.siteLink} activeClassName={m.siteLinkActive}>
+            <div className={css.item}>
+                <NavLink to='/music' className={css.siteLink} activeClassName={css.siteLinkActive}>
                     Музыка
                 </NavLink>
             </div>
-            <div className={m.item + ' ' + m.btnSettings}>
-                <NavLink to='/settings' className={m.siteLink} activeClassName={m.siteLinkActive}>
+            <div className={css.item + ' ' + css.btnSettings}>
+                <NavLink to='/settings' className={css.siteLink} activeClassName={css.siteLinkActive}>
                     Настройки
                 </NavLink>
             </div>
