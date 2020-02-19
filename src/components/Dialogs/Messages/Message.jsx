@@ -4,11 +4,10 @@ import messageAvatar from '../../images/post_avatar.jpg';
 
 const Message = (props) => {
     let message = props.message;
-
     return (
         <div className={css.message}>
             <img src={messageAvatar} alt="" />
-            <p className={css.figure}>
+            <p className={css.figureTalker}>
                 {message}
             </p>
         </div>

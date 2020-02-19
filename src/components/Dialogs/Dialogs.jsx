@@ -5,19 +5,31 @@ import Talker from "./Talkers/Talker";
 
 const Dialogs = (props) => {
 
-    let dialog = props.state.dialogs.map((d) => <Talker id={d.id} name={d.talkerName} linkId={d.linkId} />);
-    let message = props.state.messages.map((m) => <Message id={m.id} message={m.message} />);
+    let talker = props.dialogsPage.dialogs.map((t) => <Talker id={t.id} name={t.talkerName} linkId={t.linkId} />);
+    let message = props.dialogsPage.messages.map((m) => <Message id={m.id} message={m.message} />);
+    let sendMessageBtn = React.createRef();
+    let messageTextEl = React.createRef();
+
+    let sendMessage = ()=> {
+        alert(messageTextEl.current.value)
+    };
 
     return (
         <div>
             <label className={css.caption}>Диалоги</label>
             <div className={css.dialogsWrapper}>
                 <div className={css.talkers}>
-                    {dialog}
+                    {talker}
                 </div>
 
                 <div className={css.messages}>
                     {message}
+                    <div className={css.sendControls}>
+                        <textarea ref={messageTextEl} className={css.siteTextarea} placeholder='Ваше сообщение...'></textarea>
+                        <div className={css.buttonWrapp}>
+                            <button ref={sendMessageBtn} className={css.siteButton} onClick={sendMessage}>Send</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

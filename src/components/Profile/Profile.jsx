@@ -9,7 +9,10 @@ const Profile = (props) => {
         <div className={css.ProfileWrapper}>
             <PageCover />            
             <AvaDescription name='Evgenii Veber' birth='22th March' city='Khmelnitskiy' education='TUP' site='www.this.com' />
-            <MyPosts posts={props.state.posts} />
+            <MyPosts posts={props.profilePage.posts}
+                     newPostText={props.profilePage.newPostText}
+                     addPost={props.addPost}
+                     updateTextAreaPost={props.updateTextAreaPost} />
         </div>
     );
 }
