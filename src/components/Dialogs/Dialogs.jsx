@@ -5,14 +5,18 @@ import Talker from "./Talkers/Talker";
 
 const Dialogs = (props) => {
 
-    let talker = props.dialogsPage.dialogs.map((t) => <Talker id={t.id} name={t.talkerName} linkId={t.linkId} />);
-    let message = props.dialogsPage.messages.map((m) => <Message id={m.id} message={m.message} />);
-    let sendMessageBtn = React.createRef();
+    let talker = props.dialogsPage.dialogs.map((t) => <Talker id={t.id} name={t.talkerName} linkId={t.linkId}/>);
+    let message = props.dialogsPage.messages.map((m) => <Message id={m.id} message={m.message}/>);
+
     let messageTextEl = React.createRef();
 
-    let sendMessage = ()=> {
-        alert(messageTextEl.current.value)
+    let sendMessage = () => {
+        props.addMessage();
     };
+
+    let onMessageChange = () => {
+        props.updateTextAreaMessage(messageTextEl.current.value);
+    }
 
     return (
         <div>
@@ -25,9 +29,12 @@ const Dialogs = (props) => {
                 <div className={css.messages}>
                     {message}
                     <div className={css.sendControls}>
-                        <textarea ref={messageTextEl} className={css.siteTextarea} placeholder='Ваше сообщение...'></textarea>
+                        <textarea ref={messageTextEl} className={css.siteTextarea}
+                                  value={props.dialogsPage.newMessageText}
+                                  placeholder='Ваше сообщение...'
+                                  onChange={onMessageChange}/>
                         <div className={css.buttonWrapp}>
-                            <button ref={sendMessageBtn} className={css.siteButton} onClick={sendMessage}>Send</button>
+                            <button className={css.siteButton} onClick={sendMessage}>Send</button>
                         </div>
                     </div>
                 </div>

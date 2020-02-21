@@ -6,10 +6,12 @@ const Friend = (props) => {
 
     return (
         <div className={css.friendWrapper}>
-            <img src={avatar} alt="" />
-            <p><a href="#" className={css.siteLink}>
-                {props.name}
-            </a></p>
+            <img src={avatar} alt=""/>
+            <p>
+                <a href="#" className={css.siteLink}>
+                    {props.name}
+                </a>
+            </p>
         </div>
     );
 }
