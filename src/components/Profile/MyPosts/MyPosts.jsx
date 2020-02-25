@@ -1,17 +1,19 @@
 import React from 'react';
 import css from './MyPosts.module.scss';
 import Post from '../MyPosts/Post/Post'
+import {addPostActionCreator, updateTextAreaPostActionCreator} from "../../../redux/profile-reducer";
 
 const MyPosts = (props) => {
 
-    let textAreaElem = React.createRef();
+    //let textAreaElem = React.createRef();
 
     let addPost = ()=> {
-        props.addPost();
+        props.dispatch(addPostActionCreator());
     }
 
-    let onPostChange = () => {
-        props.updateTextAreaPost(textAreaElem.current.value);
+    let onPostChange = (e) => {
+        let postText = e.target.value;
+        props.dispatch(updateTextAreaPostActionCreator(postText));
     }
 
     let post = props.posts.map((p) => <Post id={p.id} message={p.postMessage} likes={p.likeCount} />);
@@ -20,7 +22,7 @@ const MyPosts = (props) => {
         <div className={css.postsWrapper}>
             <label>My posts</label>
             <div className={css.txtAreaWrapp}>
-                <textarea ref={textAreaElem} className={css.siteTextarea}
+                <textarea className={css.siteTextarea}
                           value={props.newPostText}
                           placeholder="Type your news here.."
                           onChange={onPostChange} />

@@ -1,4 +1,8 @@
-let store ={
+import profileReducer from "./profile-reducer";
+import dialogReducer from "./dialog-reducer";
+import friendBarReducer from "./friendbar-reducer";
+
+let store = {
     _state: {
         profilePage: {
             posts: [
@@ -32,49 +36,27 @@ let store ={
         }
     },
 
+    _callSubscriber() {
+        console.log('State was updated!');
+    },
+
+    dispatch(action) {
+        this._state.profilePage = profileReducer (this._state.profilePage, action);
+        this._state.dialogsPage = dialogReducer (this._state.dialogsPage, action);
+        //this._state.friendsBar = friendBarReducer (this._state.friendsBar, action);
+        this._callSubscriber(this._state);
+    },
+
     getState() {
         return this._state;
     },
 
-    _callSubscriber () {
-        console.log('State was updated!');
-    },
-
-    addPost() {
-        let post = {
-            id: 5,
-            postMessage: this._state.profilePage.newPostText,
-            likeCount: 0
-        };
-        this._state.profilePage.posts.push(post);
-        this._state.profilePage.newPostText = '';
-        this._callSubscriber(this._state); //Перерисовка дерева при изменении STATE
-    },
-
-    updateTextAreaPost(newText) {
-        this._state.profilePage.newPostText = newText;
-        this._callSubscriber(this._state); //Перерисовка дерева при изменении STATE
-    },
-
-    addMessage() {
-        let message = {
-            id: 5,
-            message: this._state.dialogsPage.newMessageText,
-        };
-        this._state.dialogsPage.messages.push(message);
-        this._state.dialogsPage.newMessageText = '';
-        this._callSubscriber(this._state); //Перерисовка дерева при изменении STATE
-    },
-
-    updateTextAreaMessage(newText){
-        this._state.dialogsPage.newMessageText = newText;
-        this._callSubscriber(this._state); //Перерисовка дерева при изменении STATE
-    },
-
-    subscribe(observer){
+    subscribe(observer) {
         this._callSubscriber = observer;
     }
+
 };
+
 
 window.store = store; //Для просмотра стейта в консоли
 

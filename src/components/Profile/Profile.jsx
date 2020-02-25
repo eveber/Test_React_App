@@ -12,8 +12,7 @@ const Profile = (props) => {
                             site='www.this.com'/>
             <MyPosts posts={props.profilePage.posts}
                      newPostText={props.profilePage.newPostText}
-                     addPost={props.addPost}
-                     updateTextAreaPost={props.updateTextAreaPost}/>
+                     dispatch={props.dispatch} />
         </div>
     );
 }
