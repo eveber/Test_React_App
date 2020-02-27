@@ -4,7 +4,7 @@ import Friend from "./Friends/Friend";
 
 const Friendsbar = (props) => {
 
-    let friend = props.friendsBar.friends.map((f)=><Friend id={f.id} name={f.friendName} /> )
+    let friend = props.friends.map((f)=><Friend id={f.id} name={f.friendName} /> )
 
     return (
         <div className={css.friendsbar}>

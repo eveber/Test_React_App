@@ -2,22 +2,20 @@ import React from 'react';
 import css from './Dialogs.module.scss';
 import Message from "./Messages/Message";
 import Talker from "./Talkers/Talker";
-import {addMessageActionCreator, updateTextAreaMessageActionCreator} from "../../redux/dialog-reducer"
 
 const Dialogs = (props) => {
 
-    let talker = props.dialogsPage.dialogs.map((t) => <Talker id={t.id} name={t.talkerName} linkId={t.linkId}/>);
-    let message = props.dialogsPage.messages.map((m) => <Message id={m.id} message={m.message}/>);
-    //let messageTextEl = React.createRef();
+    let talker = props.dialogs.map((t) => <Talker id={t.id} name={t.talkerName} linkId={t.linkId}/>);
+    let message = props.messages.map((m) => <Message id={m.id} message={m.message}/>);
 
     //Actions
     let sendMessage = () => {
-        props.dispatch(addMessageActionCreator());
+        props.sendMessage();
     };
 
     let onMessageChange = (e) => {
         let messageText = e.target.value;
-        props.dispatch(updateTextAreaMessageActionCreator(messageText));
+        props.onMessageChange(messageText);
     }
 
     return (
@@ -32,7 +30,7 @@ const Dialogs = (props) => {
                     {message}
                     <div className={css.sendControls}>
                         <textarea className={css.siteTextarea}
-                                  value={props.dialogsPage.newMessageText}
+                                  value={props.newMessageText}
                                   placeholder='Ваше сообщение...'
                                   onChange={onMessageChange}/>
                         <div className={css.buttonWrapp}>
