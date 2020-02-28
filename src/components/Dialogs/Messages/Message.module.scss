@@ -12,7 +12,7 @@
     margin-top: 10px;
   }
 
-  .figure {
+  .figureTalker, .figureMe {
     display: inline-block;
     max-width: 80%;
     margin-left: 60px;
@@ -21,6 +21,10 @@
     border-radius: 0 15px 15px 15px;
     padding: 10px;
     box-shadow: 2px 2px 4px #888;
+  }
+
+  .figureMe {
+
   }
 }
 

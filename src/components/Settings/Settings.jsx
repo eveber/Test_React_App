@@ -1,10 +1,12 @@
 import React from 'react';
-import m from './Settings.module.scss'
+import css from './Settings.module.scss'
+import sn_model from '../images/sn-model.png';
 
 const Settings = (props) => {
     return (
-      <div className={m.settingsWrapper}>
-          Settings page...
+      <div className={css.settingsWrapper}>
+          Настройки. Схема соц сети:
+          <img src={sn_model} alt=""/>
       </div>
     );
 }

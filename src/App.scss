@@ -3,7 +3,8 @@
 .App-wrapper {
   display: grid;
   grid-template-areas: //Позиционирование блоков по заданным именам
-          "h h" "n c";
+          "h h"
+          "n c";
 
   grid-template-columns: 2fr 10fr; // 2 стодбца (для для нав и для контента)
   grid-template-rows: 1fr 11fr; //2 строки (для хедера и для всего остального)

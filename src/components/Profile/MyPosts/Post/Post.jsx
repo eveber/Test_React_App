@@ -1,14 +1,14 @@
 import React from 'react';
-import m from './Post.module.scss';
+import css from './Post.module.scss';
 import postAva from '../../../images/post_avatar.jpg'
 
 const Post = (props) => {
     return (
-        <div className={m.postWrapp}>
-            <div className={m.item}>
+        <div className={css.postWrapp}>
+            <div className={css.item}>
                 <img alt="" src={postAva} />
-                <div className={m.postText}>{props.message}</div>
-                <div className={m.postLikes}>likes: {props.likes}</div>
+                <div className={css.postText}>{props.message}</div>
+                <div className={css.postLikes}>likes: {props.likes}</div>
             </div>
         </div>
     );

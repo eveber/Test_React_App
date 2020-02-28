@@ -1,39 +1,42 @@
 import React from 'react';
-import m from './Dialogs.module.scss';
+import css from './Dialogs.module.scss';
 import Message from "./Messages/Message";
 import Talker from "./Talkers/Talker";
 
-const Dialogs = () => {
-    let dialogsData = [
-        {id: 1, talkerName: 'Тимченко Николай'},
-        {id: 2, talkerName: 'Клименко Валентин'},
-        {id: 3, talkerName: 'Кузнецов Андрей'},
-        {id: 4, talkerName: 'Порошенко Пётр'},
-        {id: 5, talkerName: 'Прокопенко Авдотья'}
-    ];
+const Dialogs = (props) => {
 
-    let messagesData = [
-        {id: 1, message: 'Превед!'},
-        {id: 1, message: 'Как дела?'},
-        {id: 1, message: 'Пока!'}
-    ];
+    let talker = props.dialogs.map((t) => <Talker id={t.id} name={t.talkerName} linkId={t.linkId} key={t.id}/>);
+    let message = props.messages.map((m) => <Message id={m.id} message={m.message} key={m.id}/>);
+
+    //Actions
+    let onSendMessage = () => {
+        props.onSendMessage();
+    };
+
+    let onMessageChange = (e) => {
+        let messageText = e.target.value;
+        props.onMessageChange(messageText);
+    }
 
     return (
         <div>
-            <label className={m.caption}>Диалоги</label>
-            <div className={m.dialogsWrapper}>
-                <div className={m.talkers}>
-                    <Talker id={dialogsData[0].id} name={dialogsData[0].talkerName} linkId='1'/>
-                    <Talker id={dialogsData[1].id} name={dialogsData[1].talkerName} linkId='2'/>
-                    <Talker id={dialogsData[2].id} name={dialogsData[2].talkerName} linkId='3'/>
-                    <Talker id={dialogsData[3].id} name={dialogsData[3].talkerName} linkId='4'/>
-                    <Talker id={dialogsData[4].id} name={dialogsData[4].talkerName} linkId='5'/>
+            <label className={css.caption}>Диалоги</label>
+            <div className={css.dialogsWrapper}>
+                <div className={css.talkers}>
+                    {talker}
                 </div>
 
-                <div className={m.messages}>
-                    <Message id={messagesData[0].id} message={messagesData[0].message} />
-                    <Message id={messagesData[1].id} message={messagesData[1].message} />
-                    <Message id={messagesData[2].id} message={messagesData[2].message} />
+                <div className={css.messages}>
+                    {message}
+                    <div className={css.sendControls}>
+                        <textarea className={css.siteTextarea}
+                                  value={props.newMessageText}
+                                  placeholder='Ваше сообщение...'
+                                  onChange={onMessageChange}/>
+                        <div className={css.buttonWrapp}>
+                            <button className={css.siteButton} onClick={onSendMessage}>Send</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

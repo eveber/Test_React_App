@@ -1,0 +1,15 @@
+@import '../../Variables';
+@import '../../CustomClasses';
+
+.friendsbar {
+  //grid-area: s;
+  display: grid;
+
+  .caption {
+    grid-column: 1/4;
+    color: $second-color;
+    font-size: 24px;
+    font-weight: lighter;
+    text-transform: uppercase;
+  }
+}

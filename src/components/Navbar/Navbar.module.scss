@@ -5,6 +5,7 @@
   grid-area: n;
   padding: 10px;
   background-color: $main-color;
+  height: fit-content;
 
   .item {
     margin: 5px 0;
@@ -13,6 +14,7 @@
 
   .btnSettings {
     margin-top: $main-margin * 2;
+    margin-bottom: $main-margin * 5;
   }
 
 }

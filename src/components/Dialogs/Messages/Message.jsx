@@ -1,14 +1,13 @@
 import React from 'react';
-import m from './Message.module.scss';
+import css from './Message.module.scss';
 import messageAvatar from '../../images/post_avatar.jpg';
 
 const Message = (props) => {
     let message = props.message;
-
     return (
-        <div className={m.message}>
+        <div className={css.message}>
             <img src={messageAvatar} alt="" />
-            <p className={m.figure}>
+            <p className={css.figureTalker}>
                 {message}
             </p>
         </div>

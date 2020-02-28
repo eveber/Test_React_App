@@ -1,9 +1,9 @@
 import React from 'react';
-import m from './News.module.scss'
+import css from './News.module.scss'
 
 const News = (props) => {
     return (
-      <div className={m.newsWrapper}>
+      <div className={css.newsWrapper}>
           News page...
       </div>
     );

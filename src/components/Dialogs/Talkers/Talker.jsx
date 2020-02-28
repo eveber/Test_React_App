@@ -1,5 +1,5 @@
 import React from 'react';
-import m from './Talker.module.scss';
+import css from './Talker.module.scss';
 import {NavLink} from "react-router-dom";
 
 const Talker = (props) => {
@@ -8,8 +8,8 @@ const Talker = (props) => {
     let path = '/dialogs/' + props.linkId;
 
     return (
-        <div className={m.talker}>
-            <NavLink to={path} className={m.siteLink} activeClassName={m.siteLinkActive}>
+        <div className={css.talker}>
+            <NavLink to={path} className={css.siteLink} activeClassName={css.siteLinkActive}>
                 {talkerName}
             </NavLink>
         </div>
