@@ -3,7 +3,7 @@ import m from './Dialogs.module.scss';
 import Message from "./Messages/Message";
 import Talker from "./Talkers/Talker";
 
-const Dialogs = (props) => {
+const Dialogs = () => {
     let dialogsData = [
         {id: 1, talkerName: 'Тимченко Николай'},
         {id: 2, talkerName: 'Клименко Валентин'},
