@@ -13,7 +13,7 @@ const MyPosts = (props) => {
         props.onPostChange(postText);
     }
 
-    let post = props.posts.map((p) => <Post id={p.id} message={p.postMessage} likes={p.likeCount} />);
+    let post = props.posts.map((p) => <Post id={p.id} message={p.postMessage} likes={p.likeCount} key={p.id} />);
 
     return (
         <div className={css.postsWrapper}>

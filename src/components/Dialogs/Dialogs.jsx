@@ -5,12 +5,12 @@ import Talker from "./Talkers/Talker";
 
 const Dialogs = (props) => {
 
-    let talker = props.dialogs.map((t) => <Talker id={t.id} name={t.talkerName} linkId={t.linkId}/>);
-    let message = props.messages.map((m) => <Message id={m.id} message={m.message}/>);
+    let talker = props.dialogs.map((t) => <Talker id={t.id} name={t.talkerName} linkId={t.linkId} key={t.id}/>);
+    let message = props.messages.map((m) => <Message id={m.id} message={m.message} key={m.id}/>);
 
     //Actions
-    let sendMessage = () => {
-        props.sendMessage();
+    let onSendMessage = () => {
+        props.onSendMessage();
     };
 
     let onMessageChange = (e) => {
@@ -34,7 +34,7 @@ const Dialogs = (props) => {
                                   placeholder='Ваше сообщение...'
                                   onChange={onMessageChange}/>
                         <div className={css.buttonWrapp}>
-                            <button className={css.siteButton} onClick={sendMessage}>Send</button>
+                            <button className={css.siteButton} onClick={onSendMessage}>Send</button>
                         </div>
                     </div>
                 </div>
