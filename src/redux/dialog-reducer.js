@@ -19,8 +19,6 @@ let initialState = {
 };
 
 let dialogReducer = (state = initialState, action) => {
-    //let stateCopy = {...state};
-
     switch (action.type) {
         case ADD_MESSAGE:
             let message = {

@@ -30,6 +30,11 @@ const Navbar = (props) => {
                     Музыка
                 </NavLink>
             </div>
+            <div className={css.item}>
+                <NavLink to='/users' className={css.siteLink} activeClassName={css.siteLinkActive}>
+                    Пользователи
+                </NavLink>
+            </div>
             <div className={css.item + ' ' + css.btnSettings}>
                 <NavLink to='/settings' className={css.siteLink} activeClassName={css.siteLinkActive}>
                     Настройки
