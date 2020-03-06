@@ -1,7 +1,7 @@
 import React from 'react';
 import css from './PageCover.module.scss';
-import profileCoverImg from '../../images/city_profile.png';
-import noAvaImg from "../../images/no_avatar.png";
+import profileCoverImg from '../../../Assets/images/city_profile.png';
+import noAvaImg from "../../../Assets/images/no_avatar.png";
 
 const PageCover = (props) => {
     return (

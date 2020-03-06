@@ -6,8 +6,8 @@
           "h h"
           "n c";
 
-  grid-template-columns: 2fr 10fr; // 2 стодбца (для для нав и для контента)
-  grid-template-rows: 1fr 11fr; //2 строки (для хедера и для всего остального)
+  grid-template-columns: 2fr 10fr; // 2 столбца (для для нав и для контента)
+  grid-template-rows: 65px 11fr; //2 строки (для хедера и для всего остального)
   grid-gap: 1em; //отступы всех блоков
 
   width: 70%;

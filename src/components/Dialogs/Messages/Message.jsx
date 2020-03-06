@@ -1,6 +1,6 @@
 import React from 'react';
 import css from './Message.module.scss';
-import messageAvatar from '../../images/post_avatar.jpg';
+import messageAvatar from '../../../Assets/images/post_avatar.jpg';
 
 const Message = (props) => {
     let message = props.message;

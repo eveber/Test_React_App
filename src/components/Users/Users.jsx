@@ -1,27 +1,26 @@
 import React from "react";
 import css from './Users.module.scss';
+import User from "./User/User";
 
 
 const Users = (props) => {
-    return <div>
-        {
-            props.users.map ((u) => <div key={u.id}>
-                <div>
-                    <img src={u.avatarUrl} alt="avatar"/>
-                </div>
-                <div>
-                    {
-                        u.follow ? <button onClick={()=>{props.userUnfollow(u.id)}}>Unfollow</button> :
-                            <button onClick={()=>{props.userFollow(u.id)}}>Follow</button>
-                    }
-                </div>
-                <div>{u.id}</div>
-                <div></div>
-                <div></div>
-                <div></div>
-            </div>)
-        }
-    </div>
+
+    return (
+        <div>
+            <label className={css.siteCaption}>Пользователи</label>
+            <div className={css.usersWrapper}>
+                <User users={props.users}
+                      setUsers={props.setUsers}
+                      userFollow={props.userFollow}
+                      userUnfollow={props.userUnfollow}
+                      pageSize={props.pageSize}
+                      totalUsersCount={props.totalUsersCount}
+                      currentPage={props.currentPage}
+                      setCurrentPage={props.setCurrentPage} />
+            </div>
+        </div>
+
+    )
 };
 
 export default Users;

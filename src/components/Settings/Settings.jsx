@@ -1,6 +1,6 @@
 import React from 'react';
 import css from './Settings.module.scss'
-import sn_model from '../images/sn-model.png';
+import sn_model from '../../Assets/images/sn-model.png';
 
 const Settings = (props) => {
     return (

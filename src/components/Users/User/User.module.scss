@@ -1,0 +1,76 @@
+@import "../../../../src/Variables";
+@import "../../../../src/CustomClasses";
+
+.pagination {
+  text-align: center;
+  margin-bottom: 25px;
+
+  button {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    border-radius: 50%;
+    font-weight: bold;
+
+    &:hover {
+      font-size: 13px;
+    }
+  }
+}
+
+.selectedPage {
+  border: 1px solid $main-color;
+  color: $main-color;
+  background: #fff;
+
+  &:hover {
+    background: #fff;
+  }
+}
+
+.userItem {
+  display: flex;
+  color: $message-border-color;
+
+  .avatarWrapp {
+    //display: inline-block;
+    margin-right: $main-margin;
+    margin-bottom: $main-margin;
+
+    .photoWrapp {
+
+      text-align: center;
+
+      img {
+        width: $avatar-post-size;
+        margin-bottom: $main-margin;
+        border-radius: 50%;
+      }
+    }
+  }
+
+  .userInfoWrapp {
+    display: grid;
+    padding: $main-padding/2;
+    border: 1px solid $message-border-color;
+    border-radius: 5px;
+    min-width: 40%;
+    margin-bottom: $main-margin;
+
+    .userName,.userCountry {
+      display: inline-block;
+      width: 50%;
+      margin-bottom: $main-margin;
+    }
+
+    .userCountry, .userCity {
+      text-transform: none;
+      text-align: end;
+    }
+
+    .userCity {
+      margin-bottom: 0;
+    }
+
+  }
+}

@@ -17,6 +17,12 @@
   font-size: 18px;
 }
 
+.siteCaption {
+  font-weight: bold;
+  text-transform: uppercase;
+  display: inline-block;
+  margin-bottom: 1em;
+}
 
 //Buttons
 .siteButton {
@@ -26,6 +32,7 @@
   color: $second-color;
   width: 100px;
   height: 25px;
+  text-transform: uppercase;
 
   &:hover {
     transition: $main-transition;
