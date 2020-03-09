@@ -10,13 +10,13 @@ const Users = (props) => {
             <label className={css.siteCaption}>Пользователи</label>
             <div className={css.usersWrapper}>
                 <User users={props.users}
-                      setUsers={props.setUsers}
                       userFollow={props.userFollow}
                       userUnfollow={props.userUnfollow}
                       pageSize={props.pageSize}
                       totalUsersCount={props.totalUsersCount}
                       currentPage={props.currentPage}
-                      setCurrentPage={props.setCurrentPage} />
+                      onCurrentPageClick={props.onCurrentPageClick}
+                />
             </div>
         </div>
 
