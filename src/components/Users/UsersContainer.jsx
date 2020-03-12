@@ -11,6 +11,7 @@ import React from 'react';
 import * as axios from 'axios';
 import User from './User/User';
 import Preloader from '../common/Preloader/Preloader';
+import {getUsers} from "../../api/api";
 
 //Сontainer ClassСomponent
 class UsersContainer extends React.Component {
@@ -18,13 +19,11 @@ class UsersContainer extends React.Component {
     componentDidMount() {
         let currentPage = this.props.currentPage;
         let pageSize = this.props.pageSize;
-        let apiString = 'https://social-network.samuraijs.com/api/1.0/users';
         this.props.toggleIsFetching (true); //For Preloader!!!
-        axios.get(`${apiString}?page=${currentPage}&count=${pageSize}`)
-            .then((response) => {
+        getUsers(currentPage, pageSize).then((data) => {
                 this.props.toggleIsFetching (false);
-                this.props.setUsers(response.data.items);
-                this.props.setUsersCount(response.data.totalCount);
+                this.props.setUsers(data.items);
+                this.props.setUsersCount(data.totalCount);
             });
     }
 
@@ -33,11 +32,9 @@ class UsersContainer extends React.Component {
         let pageSize = this.props.pageSize;
         this.props.setCurrentPage(page);
         this.props.toggleIsFetching (true);
-        let apiString = 'https://social-network.samuraijs.com/api/1.0/users';
-        axios.get(`${apiString}?page=${page}&count=${pageSize}`)
-            .then((response) => {
+        getUsers(page, pageSize).then((data) => {
                 this.props.toggleIsFetching (false);
-                this.props.setUsers(response.data.items);
+                this.props.setUsers(data.items);
             });
     }
 
@@ -45,12 +42,7 @@ class UsersContainer extends React.Component {
 
         return <>
             {this.props.isFetching ? <Preloader /> : null}
-            <User users={this.props.users}
-                  userFollow={this.props.userFollow}
-                  userUnfollow={this.props.userUnfollow}
-                  pageSize={this.props.pageSize}
-                  totalUsersCount={this.props.totalUsersCount}
-                  currentPage={this.props.currentPage}
+            <User {...this.props}
                   onCurrentPageClick={this.onCurrentPageClick}
             />
         </>

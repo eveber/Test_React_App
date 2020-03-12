@@ -15,7 +15,7 @@ let initialState = {
 
 };
 
-let UsersReducer = (state = initialState, action) => {
+let usersReducer = (state = initialState, action) => {
     switch (action.type) {
         case SET_USERS:
             return {
@@ -49,7 +49,7 @@ let UsersReducer = (state = initialState, action) => {
             return {
                 ...state, totalUsersCount: action.usersCount
             }
-            case TOGGLE_IS_FETCHING:
+        case TOGGLE_IS_FETCHING:
             return {
                 ...state, isFetching: action.isFetching
             }
@@ -66,7 +66,7 @@ export let setCurrentPage = (page) => ({type: SET_CURRENT_PAGE, page});
 export let setUsersCount = (usersCount) => ({type: SET_USERS_COUNT, usersCount});
 export let toggleIsFetching = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching});
 
-export default UsersReducer;
+export default usersReducer;
 
 
 
