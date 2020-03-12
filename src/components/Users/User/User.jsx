@@ -1,8 +1,11 @@
 import React from "react";
 import noAvatar from '../../../Assets/images/no_avatar.png';
 import css from './User.module.scss';
+import {NavLink} from "react-router-dom";
+import Preloader from "../../common/Preloader/Preloader";
 
 const User = (props) => {
+
     let pageCount = Math.ceil(props.totalUsersCount / props.pageSize);
     let pages = [];
     for (let i = 1; i <= pageCount; i++) {
@@ -25,7 +28,9 @@ const User = (props) => {
                 props.users.map((u) => <div className={css.userItem} key={u.id}>
                     <div className={css.avatarWrapp}>
                         <div className={css.photoWrapp}>
-                            <img src={u.photos.small != null ? u.photos.small : noAvatar} alt="avatar"/>
+                            <NavLink to={'/profile/' + u.id}>
+                                <img src={u.photos.small != null ? u.photos.small : noAvatar} alt="avatar"/>
+                            </NavLink>
                         </div>
 
                         <div className={css.btnWrap}>

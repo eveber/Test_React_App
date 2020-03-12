@@ -12,9 +12,9 @@
   }
 
   .avatarWrapper {
+    display: flex;
 
     .avatar {
-      display: inline-block;
       margin-right: $main-margin;
 
       img {
@@ -23,8 +23,6 @@
     }
 
     .description {
-      display: inline-block;
-      position: absolute;
       font-size: 14px;
 
       .name {

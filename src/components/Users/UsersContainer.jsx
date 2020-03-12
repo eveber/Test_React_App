@@ -12,14 +12,14 @@ import * as axios from 'axios';
 import User from './User/User';
 import Preloader from '../common/Preloader/Preloader';
 
-//Class component
-class UsersApiComponent extends React.Component {
+//Сontainer ClassСomponent
+class UsersContainer extends React.Component {
 
     componentDidMount() {
         let currentPage = this.props.currentPage;
         let pageSize = this.props.pageSize;
         let apiString = 'https://social-network.samuraijs.com/api/1.0/users';
-        this.props.toggleIsFetching (true);
+        this.props.toggleIsFetching (true); //For Preloader!!!
         axios.get(`${apiString}?page=${currentPage}&count=${pageSize}`)
             .then((response) => {
                 this.props.toggleIsFetching (false);
@@ -68,14 +68,12 @@ let mapStateToProps = (state) => {
     }
 }
 
-//Container component
-const UsersContainer = connect(mapStateToProps, {
+//export container component
+export default connect(mapStateToProps, {
     setUsers,
     userFollow,
     userUnfollow,
     setCurrentPage,
     setUsersCount,
     toggleIsFetching
-})(UsersApiComponent);
-
-export default UsersContainer;
+})(UsersContainer);

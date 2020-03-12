@@ -1,9 +1,14 @@
 import React from 'react';
 import css from './PageCover.module.scss';
 import profileCoverImg from '../../../Assets/images/city_profile.png';
-import noAvaImg from "../../../Assets/images/no_avatar.png";
+import Preloader from "../../common/Preloader/Preloader";
+import noAvatar from '../../../Assets/images/no_avatar.png'
 
 const PageCover = (props) => {
+    if(!props.userProfile) {
+        return <Preloader/>
+    }
+
     return (
         <div className={css.coverWrapper}>
             <div className={css.mainImage}>
@@ -12,15 +17,19 @@ const PageCover = (props) => {
 
             <div className={css.avatarWrapper}>
                 <div className={css.avatar}>
-                    <img alt="" src={noAvaImg}/>
+                    <img alt="" src={props.userProfile.photos.small ? props.userProfile.photos.small : noAvatar}/>
                 </div>
 
                 <div className={css.description}>
-                    <div className={css.name}>{props.name}</div>
-                    <div className={css.birth}>Day of Birth: {props.birth}</div>
-                    <div className={css.city}>City: {props.city}</div>
-                    <div className={css.education}>Education: {props.education}</div>
-                    <div className={css.site}>Website: {props.site}</div>
+                    <div className={css.name}>{props.userProfile.fullName}</div>
+                    <div className={css.lockingForJob}>Поиск работы: {props.userProfile.lookingForAJob
+                        ? 'в поиске' : 'не интересует'};</div>
+                    <div className={css.lookingForAJobDescription}>Интересующая работа: {props.userProfile.lookingForAJobDescription};</div>
+                    <div className={css.about}>Обо мне: {props.userProfile.aboutMe};</div>
+                    <div className={css.contacts}>Сайт: {props.userProfile.contacts.website}</div>
+                    <div className={css.contacts}>Сайт: {props.userProfile.contacts.vk}</div>
+                    <div className={css.contacts}>Сайт: {props.userProfile.contacts.twitter}</div>
+                    <div className={css.contacts}>Сайт: {props.userProfile.contacts.facebook}</div>
                 </div>
             </div>
 

@@ -4,10 +4,10 @@ import PageCover from './Header/PageCover';
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
 
 const Profile = (props) => {
+
     return (
         <div className={css.ProfileWrapper}>
-            <PageCover name='Evgenii Veber' birth='22th March' city='Khmelnitskiy' education='TUP'
-                       site='www.this.com' />
+            <PageCover userProfile={props.userProfile} />
             <MyPostsContainer />
         </div>
     );
