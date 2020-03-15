@@ -1,4 +1,6 @@
 //Action types consts
+import {usersAPI} from "../api/api";
+
 const ADD_POST = 'ADD-POST';
 const UPDATE_TEXT_AREA_POST = 'UPDATE-TEXT-AREA-POST';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
@@ -49,5 +51,15 @@ let profileReducer = (state = initialState, action) => {
 export let addPostActionCreator = () => ({type: ADD_POST});
 export let updateTextAreaPostActionCreator = (post) => ({type: UPDATE_TEXT_AREA_POST, newText: post});
 export let setUserProfile = (userProfile) => ({type: SET_USER_PROFILE, userProfile: userProfile});
+
+//Thunk creators
+export const getUserProfile = (userId) => {
+    //thunk body
+    return (dispatch) => {
+        usersAPI.getProfile(userId).then((data) => {
+            dispatch(setUserProfile(data));
+        });
+    }
+}
 
 export default profileReducer;

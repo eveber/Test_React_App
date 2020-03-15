@@ -1,3 +1,5 @@
+import {authAPI, usersAPI} from "../api/api";
+
 const SET_AUTH_DATA = 'SET_AUTH_DATA';
 const SET_USER_PROFILE_DATA = 'SET_AUTH_DATE';
 
@@ -7,7 +9,7 @@ let initialState = {
     login: null,
     isAuth: false,
 
-    userFullNAme: null,
+    userFullName: null,
     userSmallPhoto: null
 };
 
@@ -40,5 +42,25 @@ export let setUserProfileData = (userFullNAme, userSmallPhoto) => ({
     type: SET_USER_PROFILE_DATA,
     data: {userFullNAme, userSmallPhoto}
 });
+
+
+//Thunk creators
+export const getAuthData = () => {
+    //thunk body
+    return (dispatch) => {
+        authAPI.me().then((data) => {
+            if (data.resultCode === 0) {
+                let {id, email, login} = data.data;
+                dispatch(setUserData(id, email, login));
+            }
+            let userId = data.data.id;
+            //Запрос профиля для установки авы итд..
+            usersAPI.getProfile(userId).then((data) => {
+                let {fullName, photos} = data;
+                dispatch(setUserProfileData(fullName, photos.small));
+            });
+        });
+    }
+}
 
 export default authReducer;

@@ -1,17 +1,11 @@
 import {connect} from 'react-redux';
-import {
-    setCurrentPage,
-    setUsers,
-    setUsersCount,
-    toggleIsFetching,
-    userFollow,
-    userUnfollow
-} from '../../redux/users-reducer';
+import {follow, getUsers, setCurrentPage, unfollow } from '../../redux/users-reducer';
 import React from 'react';
-import * as axios from 'axios';
 import User from './User/User';
 import Preloader from '../common/Preloader/Preloader';
-import {getUsers} from "../../api/api";
+import {Redirect} from "react-router-dom";
+
+;
 
 //Сontainer ClassСomponent
 class UsersContainer extends React.Component {
@@ -19,27 +13,19 @@ class UsersContainer extends React.Component {
     componentDidMount() {
         let currentPage = this.props.currentPage;
         let pageSize = this.props.pageSize;
-        this.props.toggleIsFetching (true); //For Preloader!!!
-        getUsers(currentPage, pageSize).then((data) => {
-                this.props.toggleIsFetching (false);
-                this.props.setUsers(data.items);
-                this.props.setUsersCount(data.totalCount);
-            });
+        this.props.getUsers(currentPage, pageSize);
+
     }
 
     //For pagination
     onCurrentPageClick = (page) => {
-        let pageSize = this.props.pageSize;
         this.props.setCurrentPage(page);
-        this.props.toggleIsFetching (true);
-        getUsers(page, pageSize).then((data) => {
-                this.props.toggleIsFetching (false);
-                this.props.setUsers(data.items);
-            });
+        let pageSize = this.props.pageSize;
+        this.props.getUsers(page, pageSize);
     }
 
     render() {
-
+        if(!this.props.isAuth) return <Redirect to='/login' />
         return <>
             {this.props.isFetching ? <Preloader /> : null}
             <User {...this.props}
@@ -56,16 +42,13 @@ let mapStateToProps = (state) => {
         pageSize: state.usersPage.pageSize,
         totalUsersCount: state.usersPage.totalUsersCount,
         currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching
+        isFetching: state.usersPage.isFetching,
+        isFollowing: state.usersPage.isFollowing,
+        isAuth: state.auth.isAuth
     }
 }
 
 //export container component
 export default connect(mapStateToProps, {
-    setUsers,
-    userFollow,
-    userUnfollow,
-    setCurrentPage,
-    setUsersCount,
-    toggleIsFetching
+    setCurrentPage, getUsers, follow, unfollow
 })(UsersContainer);

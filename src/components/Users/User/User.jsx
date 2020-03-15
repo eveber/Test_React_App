@@ -2,9 +2,6 @@ import React from "react";
 import noAvatar from '../../../Assets/images/no_avatar.png';
 import css from './User.module.scss';
 import {NavLink} from "react-router-dom";
-import * as axios from 'axios';
-import Preloader from "../../common/Preloader/Preloader";
-import {follow, unFollow} from "../../../api/api";
 
 const User = (props) => {
     let pageCount = Math.ceil(props.totalUsersCount / props.pageSize);
@@ -12,10 +9,9 @@ const User = (props) => {
     for (let i = 1; i <= pageCount; i++) {
         pages.push(i);
     }
-//debugger;
+//console.log(props);
     return (
         <div>
-            {props.isFetching ? <Preloader /> : null}
             <div className={css.pagination}>
                 {pages.map((p) => {
                     return <span onClick={() => props.onCurrentPageClick(p)}
@@ -38,23 +34,13 @@ const User = (props) => {
                         <div className={css.btnWrap}>
                             {
                                 u.follow
-                                    ? <button className={css.siteButton} onClick={() => {
-                                        props.toggleIsFetching (true); //For Preloader!!!
-                                        unFollow(u.id).then((data) => {
-                                                if(data.resultCode === 0) {
-                                                    props.userUnfollow(u.id)
-                                                }
-                                                props.toggleIsFetching (false); //For Preloader!!!
-                                            })
+                                    ? <button disabled={props.isFollowing.some((id) => id === u.id)}
+                                              className={css.siteButton} onClick={() => {
+                                        props.unfollow(u.id);
                                     }}>Unfollow</button>
-                                    : <button className={css.siteButton} onClick={() => {
-                                        props.toggleIsFetching (true); //For Preloader!!!
-                                            follow(u.id).then((data) => {
-                                                if(data.resultCode === 0) {
-                                                    props.userFollow(u.id)
-                                                }
-                                                props.toggleIsFetching (false); //For Preloader!!!
-                                            })
+                                    : <button disabled={props.isFollowing.some((id) => id === u.id)}
+                                              className={css.siteButton} onClick={() => {
+                                                  props.follow(u.id);
                                     }}>Follow</button>
                             }
                         </div>

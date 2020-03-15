@@ -44,7 +44,7 @@ let dialogReducer = (state = initialState, action) => {
 }
 
 //Action Creators
-export let addMessageActionCreator = () => ({type: ADD_MESSAGE});
-export let updateTextAreaMessageActionCreator = (message) => ({type: UPDATE_TEXT_AREA_MESSAGE, newText: message});
+export let addMessage = () => ({type: ADD_MESSAGE});
+export let updateTextAreaMessage = (message) => ({type: UPDATE_TEXT_AREA_MESSAGE, newText: message});
 
 export default dialogReducer;

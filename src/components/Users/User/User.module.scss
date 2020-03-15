@@ -50,6 +50,14 @@
         border-radius: 50%;
       }
     }
+    .btnWrap {
+      button {
+        &:disabled {
+          background: $disable-button-bg;
+          color: $disable-button-color;
+        }
+      }
+    }
   }
 
   .userInfoWrapp {

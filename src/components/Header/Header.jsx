@@ -7,8 +7,6 @@ import {NavLink} from "react-router-dom";
 
 
 const Header = (props) => {
-    //debugger;
-    //alert(props.userId);
     return (
         <header className={css.header}>
             <img className={css.logo} src={logo} alt="" />

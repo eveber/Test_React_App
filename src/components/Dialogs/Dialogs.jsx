@@ -2,6 +2,7 @@ import React from 'react';
 import css from './Dialogs.module.scss';
 import Message from "./Messages/Message";
 import Talker from "./Talkers/Talker";
+import {Redirect} from "react-router-dom";
 
 const Dialogs = (props) => {
 
@@ -10,13 +11,15 @@ const Dialogs = (props) => {
 
     //Actions
     let onSendMessage = () => {
-        props.onSendMessage();
+        props.addMessage();
     };
 
     let onMessageChange = (e) => {
         let messageText = e.target.value;
-        props.onMessageChange(messageText);
+        props.updateTextAreaMessage(messageText);
     }
+
+    if(!props.isAuth) return <Redirect to='/login' />
 
     return (
         <div>
