@@ -1,4 +1,4 @@
-import {authAPI, usersAPI} from "../api/api";
+import {authAPI, profileAPI, usersAPI} from "../api/api";
 
 const SET_AUTH_DATA = 'SET_AUTH_DATA';
 const SET_USER_PROFILE_DATA = 'SET_AUTH_DATE';
@@ -55,7 +55,7 @@ export const getAuthData = () => {
             }
             let userId = data.data.id;
             //Запрос профиля для установки авы итд..
-            usersAPI.getProfile(userId).then((data) => {
+            profileAPI.getProfile(userId).then((data) => {
                 let {fullName, photos} = data;
                 dispatch(setUserProfileData(fullName, photos.small));
             });

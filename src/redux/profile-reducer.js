@@ -1,9 +1,10 @@
 //Action types consts
-import {usersAPI} from "../api/api";
+import {profileAPI, usersAPI} from "../api/api";
 
 const ADD_POST = 'ADD-POST';
 const UPDATE_TEXT_AREA_POST = 'UPDATE-TEXT-AREA-POST';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
+const SET_USER_STATUS = 'SET_USER_STATUS';
 
 let initialState = {
     posts: [
@@ -12,7 +13,8 @@ let initialState = {
         {id: 3, postMessage: 'Ok, then fuck no one!', likeCount: 65}],
 
     newPostText: '',
-    userProfile: null
+    userProfile: null,
+    userStatus: ''
 };
 
 let profileReducer = (state = initialState, action) => {
@@ -41,6 +43,12 @@ let profileReducer = (state = initialState, action) => {
                 ...state,
                 userProfile: action.userProfile
             };
+        case SET_USER_STATUS:
+
+            return {
+                ...state,
+                userStatus: action.userStatus
+            };
 
         default:
             return state;
@@ -51,13 +59,34 @@ let profileReducer = (state = initialState, action) => {
 export let addPostActionCreator = () => ({type: ADD_POST});
 export let updateTextAreaPostActionCreator = (post) => ({type: UPDATE_TEXT_AREA_POST, newText: post});
 export let setUserProfile = (userProfile) => ({type: SET_USER_PROFILE, userProfile: userProfile});
+export let setUserStatus = (userStatus) => ({type: SET_USER_STATUS, userStatus: userStatus});
 
 //Thunk creators
 export const getUserProfile = (userId) => {
     //thunk body
     return (dispatch) => {
-        usersAPI.getProfile(userId).then((data) => {
+        profileAPI.getProfile(userId).then((data) => {
             dispatch(setUserProfile(data));
+        });
+    }
+}
+
+export const getUserStatus = (userId) => {
+    //thunk body
+    return (dispatch) => {
+        profileAPI.getUserStatus(userId).then((data) => {
+            dispatch(setUserStatus(data));
+        });
+    }
+}
+
+export const updateUserStatus = (userStatus) => {
+    //thunk body
+    return (dispatch) => {
+        profileAPI.updateUserStatus(userStatus).then((data) => {
+            if(data.resultCode === 0) {
+                dispatch(setUserStatus(data));
+            }
         });
     }
 }

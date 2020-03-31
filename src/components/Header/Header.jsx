@@ -12,7 +12,7 @@ const Header = (props) => {
             <img className={css.logo} src={logo} alt="" />
             <div className={css.userLoginWrapper}>
                 {props.isAuth
-                    ? 'пользователь: ' + props.userFullName
+                    ? 'пользователь: ' + props.login
                     : <NavLink to={'/login'} className={css.siteLink}>
                         Войти
                     </NavLink>
