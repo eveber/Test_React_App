@@ -80,14 +80,15 @@ export let toggleIsFollowing = (isFollowing, userId) => ({type: TOGGLE_IS_FOLLOW
 
 
 //Thunk creators
-export const getUsers = (currentPage, pageSize) => {
+export const requestUsers = (page, pageSize) => {
     //thunk body
     return (dispatch) => {
         dispatch(toggleIsFetching (true)); //For Preloader!!!
-        usersAPI.getUsers(currentPage, pageSize).then((data) => {
+        usersAPI.requestUsers(page, pageSize).then((data) => {
             dispatch(toggleIsFetching (false));
             dispatch(setUsers(data.items));
             dispatch(setUsersCount(data.totalCount));
+            dispatch(setCurrentPage(page));
         });
     }
 }

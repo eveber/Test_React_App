@@ -20,6 +20,14 @@
         color: $second-color;
         text-transform: uppercase;
 
+        span {
+            display: inline-block;
+            margin-bottom: 8px;
+        }
+
+        button {
+            background: $second-active-color;
+        }
     }
     
 }

@@ -11,15 +11,17 @@
 
   .txtAreaWrapp {
     display: inline-block;
-    margin-bottom: $main-margin;
+    //margin-bottom: $main-margin;
     width: 100%;
 
     .siteTextarea {
-      width: 99%;
+      //width: 99%;
+      //padding: 0;
     }
 
     .btnSendWrapp {
       text-align: end;
+      margin-bottom: $main-margin;
     }
   }
 }

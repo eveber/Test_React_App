@@ -4,7 +4,6 @@ import {NavLink} from "react-router-dom";
 import FriendsbarContainer from "../Friendsbar/Friends/FriendsbarContainer";
 
 
-
 const Navbar = (props) => {
 
     return (

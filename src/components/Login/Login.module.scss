@@ -1,0 +1,23 @@
+@import '../../Variables';
+@import '../../CustomClasses';
+
+.loginWrapper {
+
+  .ifError {
+    border: 1px dashed red;
+    border-radius: 5px;
+    color: red;
+    margin-bottom: $main-margin;
+    padding: 5px 10px;
+    display: inline-block;
+  }
+
+  .checkBoxWrapp {
+    margin: 10px;
+    margin-left: 0;
+
+    .chbxRememberMe {
+      margin-left: 0;
+    }
+  }
+}

@@ -6,11 +6,7 @@ import noAvatar from '../../../Assets/images/no_avatar.png';
 import ProfileStatus from './ProfileStatus';
 
 const PageCover = (props) => {
-    if(!props.userProfile) {
-        return <Preloader/>
-    }
 
-    //console.log(props);
     return (
         <div className={css.coverWrapper}>
             <div className={css.mainImage}>
@@ -35,7 +31,6 @@ const PageCover = (props) => {
                     <div className={css.contacts}>Сайт: {props.userProfile.contacts.facebook}</div>
                 </div>
             </div>
-
         </div>
     );
 }

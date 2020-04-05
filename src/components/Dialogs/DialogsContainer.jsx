@@ -1,11 +1,20 @@
 import React from 'react';
 import {
-    addMessage, updateTextAreaMessage
+    addMessage
 } from "../../redux/dialog-reducer"
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
+
+// class DialogsContainer extends React.Component {
+//
+//     render() {
+//         return (
+//            <Dialogs {...this.props} />
+//         )
+//     }
+// }
 
 let mapStateToProps = (state) => {
     return {
@@ -16,7 +25,7 @@ let mapStateToProps = (state) => {
 }
 
 export default compose (
-    connect(mapStateToProps, {addMessage, updateTextAreaMessage}),
+    connect(mapStateToProps, {addMessage}),
     withAuthRedirect
 )(Dialogs);
 

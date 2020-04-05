@@ -41,7 +41,7 @@
   }
 }
 
-.siteTextarea {
+.siteTextarea, .siteInput {
   background-color: #f2f2f2;
   width: 100%;
   height: 50px;
@@ -49,5 +49,11 @@
   padding: 5px;
   outline: none;
   resize: none;
-  border: none;
+  border: 2px solid $main-color;
+  border-radius: 5px;
+}
+
+.siteInput {
+  width: 200px;
+  height: 15px;
 }

@@ -1,13 +1,16 @@
-import {authAPI, profileAPI, usersAPI} from "../api/api";
+import {authAPI, profileAPI} from "../api/api";
+import {stopSubmit} from "redux-form";
 
 const SET_AUTH_DATA = 'SET_AUTH_DATA';
 const SET_USER_PROFILE_DATA = 'SET_AUTH_DATE';
+const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
 
 let initialState = {
     userId: null,
     email: null,
     login: null,
     isAuth: false,
+    isFetching: false, //Flag for run preloader
 
     userFullName: null,
     userSmallPhoto: null
@@ -19,13 +22,18 @@ let authReducer = (state = initialState, action) => {
         case SET_AUTH_DATA:
             return {
                 ...state,
-                ...action.data,
-                isAuth: true
+                ...action.payload
             }
         case SET_USER_PROFILE_DATA:
             return {
                 ...state,
                 ...action.data
+            }
+
+        case TOGGLE_IS_FETCHING:
+            return {
+                ...state,
+                isFetching: action.isFetching
             }
         default:
             return state;
@@ -34,33 +42,59 @@ let authReducer = (state = initialState, action) => {
 }
 
 //Action creators
-export let setUserData = (userId, email, login) => ({
+export let setUserData = (userId, email, login, isAuth) => ({
     type: SET_AUTH_DATA,
-    data: {userId, email, login}
+    payload: {userId, email, login, isAuth}
 });
-export let setUserProfileData = (userFullNAme, userSmallPhoto) => ({
+export let setUserProfileData = (userFullName, userSmallPhoto) => ({
     type: SET_USER_PROFILE_DATA,
-    data: {userFullNAme, userSmallPhoto}
+    data: {userFullName, userSmallPhoto}
 });
+
+export let toggleIsFetching = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching});
 
 
 //Thunk creators
-export const getAuthData = () => {
-    //thunk body
-    return (dispatch) => {
-        authAPI.me().then((data) => {
-            if (data.resultCode === 0) {
-                let {id, email, login} = data.data;
-                dispatch(setUserData(id, email, login));
+export const getAuthData = () => (dispatch) => {
+     return authAPI.me()
+        .then((response) => {
+            if (response.resultCode === 0) {
+                let {id, email, login} = response.data;
+                dispatch(setUserData(id, email, login, true));
             }
-            let userId = data.data.id;
-            //Запрос профиля для установки авы итд..
-            profileAPI.getProfile(userId).then((data) => {
-                let {fullName, photos} = data;
-                dispatch(setUserProfileData(fullName, photos.small));
-            });
+            let userId = response.data.id;
+            //Запрос профиля для установки авы
+            // итд..
+            profileAPI.getProfile(userId)
+                .then((response) => {
+                    let {fullName, photos} = response;
+                    dispatch(setUserProfileData(fullName, photos.small));
+                });
         });
-    }
+
+}
+
+export const login = (email, password, rememberMe) => (dispatch) => {
+    dispatch(toggleIsFetching(true)); //For Preloader!!!
+    authAPI.login(email, password, rememberMe) //+ isAuth
+        .then((response) => {
+            dispatch(toggleIsFetching(false));
+            if (response.resultCode === 0) {
+                dispatch(getAuthData());
+            } else {
+                let action = response.messages.length > 0 ? response.messages[0] : 'Неопределённая ошибка!'
+                dispatch(stopSubmit('login', {_error: action}))
+            }
+        });
+}
+
+export const logout = () => (dispatch) => {
+    authAPI.logout()
+        .then((response) => {
+            if (response.resultCode === 0) {
+                dispatch(setUserData(null, null, null, false));
+            }
+        });
 }
 
 export default authReducer;

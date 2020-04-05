@@ -1,0 +1,17 @@
+@import '../../../Variables';
+@import '../../../CustomClasses';
+
+.validateControlWrapper {
+  display: grid;
+
+  span {
+    color: red;
+    margin-bottom: 5px;
+  }
+}
+
+.validateControlWrapper.error>textarea,
+.validateControlWrapper.error>input
+{
+  border: 2px solid red;
+}

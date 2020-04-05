@@ -2,14 +2,19 @@ import React from "react";
 import noAvatar from '../../../Assets/images/no_avatar.png';
 import css from './User.module.scss';
 import {NavLink} from "react-router-dom";
+import Preloader from "../../common/Preloader/Preloader";
 
 const User = (props) => {
+    if(props.isFetching) {
+        return <Preloader/>
+    }
+
     let pageCount = Math.ceil(props.totalUsersCount / props.pageSize);
     let pages = [];
     for (let i = 1; i <= pageCount; i++) {
         pages.push(i);
     }
-//console.log(props);
+
     return (
         <div>
             <div className={css.pagination}>
@@ -40,7 +45,7 @@ const User = (props) => {
                                     }}>Unfollow</button>
                                     : <button disabled={props.isFollowing.some((id) => id === u.id)}
                                               className={css.siteButton} onClick={() => {
-                                                  props.follow(u.id);
+                                        props.follow(u.id);
                                     }}>Follow</button>
                             }
                         </div>

@@ -1,6 +1,6 @@
 //Action types consts
 const ADD_MESSAGE = 'ADD-MESSAGE';
-const UPDATE_TEXT_AREA_MESSAGE = 'UPDATE-TEXT-AREA-MESSAGE';
+//const UPDATE_TEXT_AREA_MESSAGE = 'UPDATE-TEXT-AREA-MESSAGE';
 
 let initialState = {
     dialogs: [
@@ -13,9 +13,8 @@ let initialState = {
     messages: [
         {id: 1, message: 'Превед!'},
         {id: 2, message: 'Как дела?'},
-        {id: 3, message: 'Пока!'}],
+        {id: 3, message: 'Пока!'}]
 
-    newMessageText: ''
 };
 
 let dialogReducer = (state = initialState, action) => {
@@ -23,20 +22,13 @@ let dialogReducer = (state = initialState, action) => {
         case ADD_MESSAGE:
             let message = {
                 id: 5,
-                message: state.newMessageText,
+                message: action.messageText,
             };
 
             return {
                 ...state,
-                messages: [...state.messages, message],
-                newMessageText: ''
-            }
-
-        case UPDATE_TEXT_AREA_MESSAGE:
-            return {
-                ...state,
-                newMessageText: action.newText
-            }
+                messages: [...state.messages, message]
+            };
 
         default:
             return state;
@@ -44,7 +36,6 @@ let dialogReducer = (state = initialState, action) => {
 }
 
 //Action Creators
-export let addMessage = () => ({type: ADD_MESSAGE});
-export let updateTextAreaMessage = (message) => ({type: UPDATE_TEXT_AREA_MESSAGE, newText: message});
+export let addMessage = (messageText) => ({type: ADD_MESSAGE, messageText});
 
 export default dialogReducer;
