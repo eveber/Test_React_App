@@ -21,3 +21,4 @@ export const isFetchingSel = (state) => {
 export const isFollowingSel = (state) => {
     return state.usersPage.isFollowing;
 }
+

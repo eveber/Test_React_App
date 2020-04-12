@@ -6,7 +6,6 @@ import {maxLengthCreator, required} from "../../utils/validators";
 import {login} from "../../redux/auth-reducer";
 import {connect} from "react-redux";
 import {Redirect} from "react-router-dom";
-import Preloader from "../common/Preloader/Preloader";
 
 let maxLength50 = maxLengthCreator(50);
 

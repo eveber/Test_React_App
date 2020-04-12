@@ -7,6 +7,13 @@ import ProfileStatus from './ProfileStatus';
 
 const PageCover = (props) => {
 
+    let onMainPhotoSelected = (e) => {
+        if(e.target.files.length) {
+            let avatarFile = e.target.files[0];
+            props.saveAvatar(avatarFile);
+        }
+    }
+
     return (
         <div className={css.coverWrapper}>
             <div className={css.mainImage}>
@@ -15,7 +22,10 @@ const PageCover = (props) => {
 
             <div className={css.avatarWrapper}>
                 <div className={css.avatar}>
-                    <img alt="" src={props.userProfile.photos.small ? props.userProfile.photos.small : noAvatar}/>
+                    <img alt="" src={props.userProfile.photos.large || noAvatar}/>
+                    <div className={css.uploadPhotoWrapper}>
+                        {!props.isOwner && <input type="file" onChange={onMainPhotoSelected} />}
+                    </div>
                 </div>
 
                 <div className={css.description}>

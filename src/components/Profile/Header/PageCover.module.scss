@@ -18,7 +18,14 @@
       margin-right: $main-margin;
 
       img {
-        width: 100px;
+        width: 120px;
+      }
+
+      .uploadPhotoWrapper {
+        text-align: center;
+        max-width: 115px;
+        overflow: hidden;
+        padding-left: 2px;
       }
     }
 
@@ -33,6 +40,7 @@
       font-size: 14px;
 
       .name {
+        text-transform: uppercase;
         margin-bottom: 10px;
         font-size: 16px;
         font-weight: bold;

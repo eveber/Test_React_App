@@ -6,15 +6,20 @@ import {Route, withRouter} from "react-router-dom";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
-import DialogsContainer from "./components/Dialogs/DialogsContainer";
-import UsersContainer from "./components/Users/UsersContainer";
-import ProfileContainer from "./components/Profile/ProfileContainer";
+//import DialogsContainer from "./components/Dialogs/DialogsContainer";
+//import UsersContainer from "./components/Users/UsersContainer";
+//import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import Login from "./components/Login/Login";
 import Preloader from "./components/common/Preloader/Preloader";
 import {initializeApp} from "./redux/app-reducer";
 import {connect} from "react-redux";
 import {compose} from "redux";
+import {withSuspense} from "./hoc/withSuspense";
+
+const DialogsContainer = React.lazy(() => import ("./components/Dialogs/DialogsContainer"));
+const UsersContainer = React.lazy(() => import ("./components/Users/UsersContainer"));
+const ProfileContainer = React.lazy(() => import ("./components/Profile/ProfileContainer"));
 
 class App extends React.Component {
 
@@ -32,11 +37,11 @@ class App extends React.Component {
                 <HeaderContainer />
                 <Navbar />
                 <div className="app-content-wrapper">
-                    <Route render={() => <ProfileContainer />} path='/profile/:userId?'/>
-                    <Route render={() => <DialogsContainer />} path='/dialogs'/>
+                    <Route render={withSuspense(ProfileContainer)} path='/profile/:userId?'/>
+                    <Route render={withSuspense(DialogsContainer)} path='/dialogs'/>
                     <Route component={News} path='/news'/>
                     <Route component={Music} path='/music'/>
-                    <Route render={() => <UsersContainer />} path='/users'/>
+                    <Route render={withSuspense(UsersContainer)} path='/users'/>
                     <Route component={Settings} path='/settings'/>
                     <Route component={Login} path='/login'/>
                 </div>
@@ -54,4 +59,3 @@ export default compose (
     withRouter
 )(App);
 
-//export default connect(mapStateToProps, {initializeApp})(App);

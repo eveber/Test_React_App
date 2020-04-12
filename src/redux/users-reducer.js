@@ -11,7 +11,7 @@ const TOGGLE_IS_FOLLOWING = 'TOGGLE_IS_FOLOWING';
 
 let initialState = {
     users: [],
-    pageSize: 100,
+    pageSize: 10,
     totalUsersCount: 0,
     currentPage: 1,
     isFetching: false, //Flag for run preloader
@@ -23,27 +23,28 @@ let usersReducer = (state = initialState, action) => {
     switch (action.type) {
         case SET_USERS:
             return {
-                ...state, users: action.users //Копируем стейт, копируем юзеров
+                ...state,
+                users: action.users //Копируем стейт, копируем юзеров
             }
         case FOLLOW:
             return {
                 ...state, //Копируем стейт
-                users: [...state.users.map((u) => { //копируем юзеров, т.к. в одном из них нужно что-то менять
+                users: state.users.map((u) => { //копируем юзеров, т.к. в одном из них нужно что-то менять
                     if (u.id === action.userId) { // Условие, если айдишка экшн и копии юзера стейт совпадают, то:
-                        return {...u, follow: true} //Возвращаем копию юзера, но меняем что-то у него(фоллоу)
+                        return {...u, followed: true} //Возвращаем копию юзера, но меняем что-то у него(followed)
                     }
-                    return u; //возвращаем если айдишка не совпадает (или уже модифицированную копию)
-                })]
+                    return u; //возвращаем если айдишка не совпадает
+                })
             }
         case UNFOLLOW:
             return {
                 ...state, //Копируем стейт
-                users: [...state.users.map((u) => { //копируем юзеров, т.к. в одном из них нужно что-то менять
+                users: state.users.map((u) => { //копируем юзеров, т.к. в одном из них нужно что-то менять
                     if (u.id === action.userId) { // Услови, если айдишка экшн и копии юзера стейт совпадают, то:
-                        return {...u, follow: false} //Возвращаем копию юзера, но меняем что-то у него(фоллоу)
+                        return {...u, followed: false} //Возвращаем копию юзера, но меняем что-то у него(followed)
                     }
-                    return u; //возвращаем если айдишка не совпадает (или уже модифицированную копию)
-                })]
+                    return u; //возвращаем если айдишка не совпадает
+                })
             }
         case SET_CURRENT_PAGE:
             return {
@@ -61,8 +62,8 @@ let usersReducer = (state = initialState, action) => {
             return {
                 ...state,
                 isFollowing: action.isFollowing
-                ? [...state.isFollowing, action.userId] //Дописываем юзера в конец массива зафоловенных зеров
-                    : state.isFollowing.filter((userId) => userId != action.userId) //Оставляем только тех, кто не равен входящей айди.
+                    ? [...state.isFollowing, action.userId] //Дописываем юзера в конец массива зафоловенных зеров
+                    : state.isFollowing.filter((userId) => userId !== action.userId) //Оставляем только тех, кто не равен входящей айди.
             }
         default:
             return state;
@@ -80,45 +81,34 @@ export let toggleIsFollowing = (isFollowing, userId) => ({type: TOGGLE_IS_FOLLOW
 
 
 //Thunk creators
-export const requestUsers = (page, pageSize) => {
-    //thunk body
-    return (dispatch) => {
-        dispatch(toggleIsFetching (true)); //For Preloader!!!
-        usersAPI.requestUsers(page, pageSize).then((data) => {
-            dispatch(toggleIsFetching (false));
-            dispatch(setUsers(data.items));
-            dispatch(setUsersCount(data.totalCount));
-            dispatch(setCurrentPage(page));
-        });
-    }
+export const requestUsers = (page, pageSize) => async (dispatch) => {
+    dispatch(toggleIsFetching(true)); //For Preloader!!!
+    let response = await usersAPI.requestUsers(page, pageSize);
+    dispatch(toggleIsFetching(false));
+    dispatch(setUsers(response.items));
+    dispatch(setUsersCount(response.totalCount));
+    dispatch(setCurrentPage(page));
 }
 
-export const follow = (userId) => {
-    //thunk body
-    return (dispatch) => {
-        dispatch(toggleIsFollowing (true, userId));
-        usersAPI.follow(userId).then((data) => {
-            if(data.resultCode === 0) {
-                dispatch(followSuccess(userId))
-            }
-            dispatch(toggleIsFollowing (false, userId));
-        })
+
+export const follow = (userId) => async (dispatch) => {
+    dispatch(toggleIsFollowing(true, userId));
+    let response = await usersAPI.follow(userId);
+    if (response.resultCode === 0) {
+        dispatch(followSuccess(userId))
     }
+    dispatch(toggleIsFollowing(false, userId));
 }
 
-export const unfollow = (userId) => {
-    //thunk body
-    return (dispatch) => {
-        dispatch(toggleIsFollowing (true, userId));
-        usersAPI.unFollow(userId).then((data) => {
-            if(data.resultCode === 0) {
-                dispatch(unfollowSuccess(userId))
-            }
-            dispatch(toggleIsFollowing (false, userId));
-        })
-    }
-}
 
+export const unfollow = (userId) => async (dispatch) => {
+    dispatch(toggleIsFollowing(true, userId));
+    let response = await usersAPI.unFollow(userId);
+    if (response.resultCode === 0) {
+        dispatch(unfollowSuccess(userId))
+    }
+    dispatch(toggleIsFollowing(false, userId));
+}
 
 
 export default usersReducer;

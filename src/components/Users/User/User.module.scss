@@ -1,36 +1,6 @@
 @import "../../../../src/Variables";
 @import "../../../../src/CustomClasses";
 
-.pagination {
-  text-align: center;
-  margin-bottom: 25px;
-
-  span {
-    display: inline-block;
-    margin-right: 10px;
-    padding-bottom: 3px;
-    font-weight: bold;
-    cursor: pointer;
-
-    &:hover {
-      //font-size: 13px;
-    }
-  }
-}
-
-.selectedPage {
-  //border: 1px solid $main-color;
-  text-decoration: underline;
-  color: $main-color;
-  background: #fff;
-  font-size: 18px;
-
-
-  &:hover {
-    background: #fff;
-  }
-}
-
 .userItem {
   display: flex;
   color: $message-border-color;

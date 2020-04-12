@@ -1,0 +1,36 @@
+@import "../../../../src/Variables";
+@import "../../../../src/CustomClasses";
+
+.pagination {
+  text-align: center;
+  margin-bottom: 25px;
+
+  .btnPrev {
+    margin-right: 10px;
+  }
+
+  span {
+    display: inline-block;
+    margin-right: 10px;
+    padding-bottom: 3px;
+    font-weight: bold;
+    cursor: pointer;
+
+    &:hover {
+      color: $main-color;
+    }
+  }
+}
+
+.selectedPage {
+  //border: 1px solid $main-color;
+  text-decoration: underline;
+  color: $main-color;
+  background: #fff;
+  font-size: 18px;
+
+
+  &:hover {
+    background: #fff;
+  }
+}

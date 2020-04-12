@@ -54,47 +54,38 @@ export let setUserProfileData = (userFullName, userSmallPhoto) => ({
 export let toggleIsFetching = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching});
 
 
-//Thunk creators
-export const getAuthData = () => (dispatch) => {
-     return authAPI.me()
-        .then((response) => {
-            if (response.resultCode === 0) {
-                let {id, email, login} = response.data;
-                dispatch(setUserData(id, email, login, true));
-            }
-            let userId = response.data.id;
-            //Запрос профиля для установки авы
-            // итд..
-            profileAPI.getProfile(userId)
-                .then((response) => {
-                    let {fullName, photos} = response;
-                    dispatch(setUserProfileData(fullName, photos.small));
-                });
-        });
+//Thunk
+export const getAuthData = () => async (dispatch) => {
+    let response = await authAPI.me();
+    if (response.resultCode === 0) {
+        let {id, email, login} = response.data;
+        dispatch(setUserData(id, email, login, true)); //+ isAuth
+    }
 
+    let userId = response.data.id;
+    //Запрос профиля для установки авы итд..
+    response = await profileAPI.getProfile(userId);
+    let {fullName, photos} = response;
+    dispatch(setUserProfileData(fullName, photos.small));
 }
 
-export const login = (email, password, rememberMe) => (dispatch) => {
+export const login = (email, password, rememberMe) => async (dispatch) => {
     dispatch(toggleIsFetching(true)); //For Preloader!!!
-    authAPI.login(email, password, rememberMe) //+ isAuth
-        .then((response) => {
-            dispatch(toggleIsFetching(false));
-            if (response.resultCode === 0) {
-                dispatch(getAuthData());
-            } else {
-                let action = response.messages.length > 0 ? response.messages[0] : 'Неопределённая ошибка!'
-                dispatch(stopSubmit('login', {_error: action}))
-            }
-        });
+    let response = await authAPI.login(email, password, rememberMe);
+    dispatch(toggleIsFetching(false));
+    if (response.resultCode === 0) {
+        dispatch(getAuthData());
+    } else {
+        let action = response.messages.length > 0 ? response.messages[0] : 'Неопределённая ошибка!'
+        dispatch(stopSubmit('login', {_error: action}))
+    }
 }
 
-export const logout = () => (dispatch) => {
-    authAPI.logout()
-        .then((response) => {
-            if (response.resultCode === 0) {
-                dispatch(setUserData(null, null, null, false));
-            }
-        });
+export const logout = () => async (dispatch) => {
+    let response = await authAPI.logout()
+    if (response.resultCode === 0) {
+        dispatch(setUserData(null, null, null, false));
+    }
 }
 
 export default authReducer;

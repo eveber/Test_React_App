@@ -1,7 +1,8 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import css from "./PageCover.module.scss";
 
 const ProfileStatus = (props) => {
+
     let [editMode, setEditMode] = useState(false);
     let [userStatus, setUserStatus] = useState(props.userStatus);
 
@@ -17,6 +18,9 @@ const ProfileStatus = (props) => {
     let onStatusChange = (e) => {
         setUserStatus(e.currentTarget.value);
     }
+
+    //Local state sinchronization with state
+    useEffect(() => {setUserStatus (props.userStatus)}, [props.userStatus]);
 
     return (
 

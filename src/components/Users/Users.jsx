@@ -1,7 +1,7 @@
 import React from "react";
 import css from './Users.module.scss';
 import User from "./User/User";
-
+import Paginator from "../common/Paginator/Paginator";
 
 const Users = (props) => {
 
@@ -9,7 +9,8 @@ const Users = (props) => {
         <div>
             <label className={css.siteCaption}>Пользователи</label>
             <div className={css.usersWrapper}>
-                <User {...props} />
+                <Paginator {...props} totalItemsCount = {props.totalUsersCount} />
+                {props.users.map((u) => <User {...props} user={u} key={u.id} />)}
             </div>
         </div>
 

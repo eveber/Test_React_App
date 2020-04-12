@@ -9,43 +9,28 @@ const User = (props) => {
         return <Preloader/>
     }
 
-    let pageCount = Math.ceil(props.totalUsersCount / props.pageSize);
-    let pages = [];
-    for (let i = 1; i <= pageCount; i++) {
-        pages.push(i);
-    }
-
+    let user = props.user;
     return (
-        <div>
-            <div className={css.pagination}>
-                {pages.map((p) => {
-                    return <span onClick={() => props.onCurrentPageClick(p)}
-                                 className={props.currentPage === p && css.selectedPage}>
-                         {p}
-                     </span>
-
-                })}
-            </div>
-
-            {
-                props.users.map((u) => <div className={css.userItem} key={u.id}>
+                 <div className={css.userItem}>
                     <div className={css.avatarWrapp}>
                         <div className={css.photoWrapp}>
-                            <NavLink to={'/profile/' + u.id}>
-                                <img src={u.photos.small != null ? u.photos.small : noAvatar} alt="avatar"/>
+                            <NavLink to={'/profile/' + user.id}>
+                                <img src={user.photos.small != null ? user.photos.small : noAvatar} alt="avatar"/>
                             </NavLink>
                         </div>
 
                         <div className={css.btnWrap}>
                             {
-                                u.follow
-                                    ? <button disabled={props.isFollowing.some((id) => id === u.id)}
-                                              className={css.siteButton} onClick={() => {
-                                        props.unfollow(u.id);
+                                user.followed
+                                    ? <button disabled={props.isFollowing.some((id) => id === user.id)}
+                                              className={css.siteButton}
+                                              onClick={() => {
+                                        props.unfollow(user.id);
                                     }}>Unfollow</button>
-                                    : <button disabled={props.isFollowing.some((id) => id === u.id)}
-                                              className={css.siteButton} onClick={() => {
-                                        props.follow(u.id);
+                                    : <button disabled={props.isFollowing.some((id) => id === user.id)}
+                                              className={css.siteButton}
+                                              onClick={() => {
+                                        props.follow(user.id);
                                     }}>Follow</button>
                             }
                         </div>
@@ -53,18 +38,15 @@ const User = (props) => {
 
                     <div className={css.userInfoWrapp}>
                         <div>
-                            <div className={css.userName + ' ' + css.siteCaption}>{u.name}</div>
+                            <div className={css.userName + ' ' + css.siteCaption}>{user.name}</div>
                             <div className={css.userCountry + ' ' + css.siteCaption}>Country,</div>
                         </div>
                         <div className={css.userCity + ' ' + css.siteCaption}>City</div>
                         <div className={css.userStatus}>Status...</div>
                     </div>
 
-                </div>)
-            }
-        </div>
+                </div>
     )
 }
-
 
 export default User;

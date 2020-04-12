@@ -12,7 +12,10 @@ const Profile = (props) => {
 
     return (
         <div className={css.ProfileWrapper}>
-            <PageCover {...props} />
+            <PageCover {...props}
+                       isOwner={props.isOwner}
+                       saveAvatar={props.saveAvatar}
+            />
             <MyPostsContainer />
         </div>
     );

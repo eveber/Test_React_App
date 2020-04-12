@@ -4,12 +4,14 @@ import {profileAPI} from "../api/api";
 const ADD_POST = 'ADD_POST';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const SET_USER_STATUS = 'SET_USER_STATUS';
+const UPLOAD_PHOTO_SUCCESS = 'UPLOAD_PHOTO_SUCCESS';
 
 let initialState = {
     posts: [
         {id: 1, postMessage: 'Hey! Anybody here?', likeCount: 10},
         {id: 2, postMessage: 'Nope, no one here!', likeCount: 4},
-        {id: 3, postMessage: 'Ok, then fuck no one!', likeCount: 65}],
+        {id: 3, postMessage: 'Ok, then fuck no one!', likeCount: 65}
+        ],
 
     userProfile: null,
     userStatus: ''
@@ -41,6 +43,12 @@ let profileReducer = (state = initialState, action) => {
                 ...state,
                 userStatus: action.userStatus
             };
+        case UPLOAD_PHOTO_SUCCESS:
+
+            return {
+                ...state,
+                userProfile: {...state.userProfile, photos: action.photos}
+            };
 
         default:
             return state;
@@ -51,35 +59,35 @@ let profileReducer = (state = initialState, action) => {
 export let addPost = (newPostText) => ({type: ADD_POST, newPostText});
 export let setUserProfile = (userProfile) => ({type: SET_USER_PROFILE, userProfile});
 export let setUserStatus = (userStatus) => ({type: SET_USER_STATUS, userStatus});
+export let uploadPhotoSuccess = (photos) => ({type: UPLOAD_PHOTO_SUCCESS, photos});
 
 //Thunk creators
-export const getUserProfile = (userId) => {
-    //thunk body
-    return (dispatch) => {
-        profileAPI.getProfile(userId).then((data) => {
-            dispatch(setUserProfile(data));
-        });
+export const getUserProfile = (userId) => async (dispatch) => {
+    let response = await profileAPI.getProfile(userId);
+    dispatch(setUserProfile(response));
+}
+
+
+export const getUserStatus = (userId) => async (dispatch) => {
+    let response = await profileAPI.getUserStatus(userId);
+    dispatch(setUserStatus(response));
+}
+
+
+export const updateUserStatus = (userStatus) => async (dispatch) => {
+    let response = await profileAPI.updateUserStatus(userStatus);
+    if (response.resultCode === 0) {
+        dispatch(setUserStatus(userStatus));
     }
 }
 
-export const getUserStatus = (userId) => {
-    //thunk body
-    return (dispatch) => {
-        profileAPI.getUserStatus(userId).then((data) => {
-            dispatch(setUserStatus(data));
-        });
+export const saveAvatar = (file) => async (dispatch) => {
+    let response = await profileAPI.saveAvatar(file);
+    if (response.resultCode === 0) {
+        let photos = response.data.photos;
+        dispatch(uploadPhotoSuccess(photos));
     }
 }
 
-export const updateUserStatus = (userStatus) => {
-    //thunk body
-    return (dispatch) => {
-        profileAPI.updateUserStatus(userStatus).then((response) => {
-            if(response.resultCode === 0) {
-                dispatch(setUserStatus(userStatus));
-            }
-        });
-    }
-}
 
 export default profileReducer;
