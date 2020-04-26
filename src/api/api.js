@@ -1,11 +1,12 @@
 import React from "react";
 import * as axios from "axios";
+import {getCaptcha} from "../redux/auth-reducer";
 
 //Instance for previous query settings
 const instance = axios.create({
     withCredentials: true,
     headers: {
-        'API-KEY': 'af36aa18-3373-4795-b041-caeb2d343bec'
+        'API-KEY': '93c267b5-5b93-4225-bc41-d44947558d7f'
     },
     baseURL: 'https://social-network.samuraijs.com/api/1.0/'
 });
@@ -56,6 +57,11 @@ export const profileAPI = {
             }
         })
             .then(response => response.data) // return clear data
+    },
+
+    saveProfile(profile) {
+        return instance.put(`profile`, profile)
+            .then(response => response.data) // return clear data
     }
 };
 
@@ -66,13 +72,20 @@ export const authAPI = {
             .then(response => response.data) // return clear data
     },
 
-    login(email, password, rememberMe = false) {
-        return instance.post(`auth/login`, {email, password, rememberMe})
+    login(email, password, rememberMe = false, captcha = null) {
+        return instance.post(`auth/login`, {email, password, rememberMe, captcha})
             .then(response => response.data) // return clear data
     },
 
     logout() {
         return instance.delete(`auth/login`)
+            .then(response => response.data) // return clear data
+    }
+};
+
+export const sequrityAPI = {
+    getCaptcha() {
+        return instance.get(`security/get-captcha-url`)
             .then(response => response.data) // return clear data
     }
 };

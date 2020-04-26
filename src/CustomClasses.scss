@@ -57,3 +57,13 @@
   width: 200px;
   height: 15px;
 }
+
+.ifError {
+  border: 1px dashed red;
+  border-radius: 5px;
+  color: red;
+  margin-bottom: $main-margin;
+  padding: 5px 10px;
+  display: inline-block;
+  margin: 10px 0;
+}

@@ -14,7 +14,7 @@ const Profile = (props) => {
         <div className={css.ProfileWrapper}>
             <PageCover {...props}
                        isOwner={props.isOwner}
-                       saveAvatar={props.saveAvatar}
+                       //saveAvatar={props.saveAvatar}
             />
             <MyPostsContainer />
         </div>

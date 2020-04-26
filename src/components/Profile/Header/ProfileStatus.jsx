@@ -24,15 +24,16 @@ const ProfileStatus = (props) => {
 
     return (
 
-        <div className={css.profileStatus}>
+        <div className={css.profileStatusWrapper}>
             {!editMode &&
             <div>
-                <span onClick={editModeOn}>{props.userStatus || 'No status...'}</span>
+                <b>Статус: </b><span onClick={editModeOn}>{props.userStatus || 'Без статуса..'}</span>
             </div>
             }
             {editMode &&
             <div>
-                <input autoFocus={true}
+                <input className={css.siteInput}
+                    autoFocus={true}
                        type="text"
                        value={userStatus}
                        onChange={onStatusChange}

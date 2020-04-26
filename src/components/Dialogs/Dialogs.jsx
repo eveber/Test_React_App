@@ -15,7 +15,7 @@ const DialogForm = (props) => {
                    validate={[required, maxLength1000]}
                    name='messageText'
                    component={ValidateFormControl}
-                   validateTag='textarea'
+                   validatetag='textarea'
                    placeholder='Ваше сообщение...'
             />
             <div className={css.buttonWrapp}>

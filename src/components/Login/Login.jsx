@@ -24,7 +24,7 @@ const LoginForm = (props) => {
                        name='email'
                        playsholder='Email'
                        component={ValidateFormControl}
-                       validateTag='input'
+                       validatetag='input'
                        validate={[required, maxLength50]}
                 />
             </div>
@@ -34,7 +34,7 @@ const LoginForm = (props) => {
                        type='password'
                        playsholder='Password'
                        component={ValidateFormControl}
-                       validateTag='input'
+                       validatetag='input'
                        validate={[required, maxLength50]}
                 />
             </div>
@@ -43,13 +43,25 @@ const LoginForm = (props) => {
                        name='rememberMe'
                        component='input'
                        type='checkbox'
-                       checked
                 />
-                <label htmlFor=''>Запомнить меня</label>
+                <label htmlFor='rememberMe'>Запомнить меня</label>
             </div>
             <div>
                 <button className={css.siteButton}>Login</button>
             </div>
+            {
+                props.captchaUrl &&
+                <div>
+                    <img src={props.captchaUrl} alt=""/>
+                    <Field className={css.siteInput}
+                           name='captcha'
+                           playsholder='captcha'
+                           component={ValidateFormControl}
+                           validatetag='input'
+                           validate={[required, maxLength50]}
+                    />
+                </div>
+            }
         </form>
     )
 }
@@ -59,7 +71,7 @@ const LoginFormRedux = reduxForm({form: 'login'})(LoginForm);
 const Login = (props) => {
 
     const onLogin = (formData) => {
-        props.login(formData.email, formData.password, formData.rememberMe);
+        props.login(formData.email, formData.password, formData.rememberMe, formData.captcha);
     }
 
     if (props.isAuth) return <Redirect to='/Profile'/>
@@ -67,13 +79,15 @@ const Login = (props) => {
     return (
         <div className={css.loginWrapper}>
             <h1>Login Page</h1>
-            <LoginFormRedux onSubmit={onLogin}/>
+            <LoginFormRedux onSubmit={onLogin} captchaUrl={props.captchaUrl} />
         </div>
     )
 }
 
 const mapStateToProps = (state) => ({
     isAuth: state.auth.isAuth,
+    captchaUrl: state.auth.captchaUrl,
     isFetching: state.auth.isFetching
 });
+
 export default connect(mapStateToProps, {login})(Login);

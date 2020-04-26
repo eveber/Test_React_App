@@ -10,7 +10,6 @@ import {
     pageSizeSel, totalUsersCountSel,
     usersSel
 } from "../../redux/users-selectors";
-import Preloader from "../common/Preloader/Preloader";
 
 //Сontainer ClassСomponent
 class UsersContainer extends React.Component {

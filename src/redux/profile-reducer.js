@@ -1,5 +1,6 @@
 //Action types consts
 import {profileAPI} from "../api/api";
+import {stopSubmit} from "redux-form";
 
 const ADD_POST = 'ADD_POST';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
@@ -86,6 +87,18 @@ export const saveAvatar = (file) => async (dispatch) => {
     if (response.resultCode === 0) {
         let photos = response.data.photos;
         dispatch(uploadPhotoSuccess(photos));
+    }
+}
+
+export const saveProfile = (profile) => async (dispatch, getState) => {
+    const userId = getState().auth.userId;
+    let response = await profileAPI.saveProfile(profile);
+    if (response.resultCode === 0) {
+        dispatch(getUserProfile(userId));
+    } else {
+        let action = response.messages.length > 0 ? response.messages[0] : 'Неопределённая ошибка!';
+        dispatch(stopSubmit('edit-profile', {_error: action}));
+        return Promise.reject(response.messages[0]); //Возврат промиса при ошибке
     }
 }
 

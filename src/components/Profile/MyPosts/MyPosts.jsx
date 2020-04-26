@@ -13,8 +13,8 @@ const AddPostForm = (props) => {
             <Field className={css.siteTextarea}
                    name='postText'
                    component={ValidateFormControl}
-                   validateTag='textarea'
-                   placeholder="Type your news here.."
+                   validatetag='textarea'
+                   placeholder="Tекст сообщения..."
                    validate={[required, maxLength1000]}
             />
             <div className={css.btnSendWrapp}>
